@@ -1,0 +1,31 @@
+services:
+    app:
+        build: .
+        container_name: app
+        image: php:8.2-apache
+        volumes:
+            - .:/var/www/html
+        ports:
+            - '80:80'
+        networks:
+            - app
+
+    mysql:
+        image: mysql
+        container_name: mysql
+        volumes:
+            - mysql:/var/lib/mysql
+            - ./db.sql:/docker-entrypoint-initdb.d/db.sql
+        environment:
+            - MYSQL_ROOT_PASSWORD=root
+        ports:
+            - 3306:3306
+        networks:
+            - app
+
+volumes:
+    mysql:
+
+networks:
+    app:
+      driver: bridge

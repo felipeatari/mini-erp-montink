@@ -1,0 +1,13 @@
+{
+  "autoload":{
+    "psr-4":{
+      "App\\":"app/"
+    },
+    "files":[
+      "config/config.php",
+      "config/env.php",
+      "tests/config/debug.php"
+    ]
+  },
+  "require": {}
+}
