@@ -2,7 +2,7 @@
 
 namespace App\Web;
 
-use App\Web\Controllers\Error;
+use App\Web\Controllers\ErroController;
 use Closure;
 
 class Router
@@ -210,10 +210,10 @@ class Router
       if ($this->callback) {
         $this->api = true;
 
-        die(Error::error_api($this->http_status_code, $message_error));
+        die(ErroController::error_api($this->http_status_code, $message_error));
       }
 
-      return Error::error($this->http_status_code, $message_error);
+      return ErroController::error($this->http_status_code, $message_error);
     }
 
     if ($this->callback) {

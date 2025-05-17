@@ -4,12 +4,12 @@ namespace App\Web\Controllers;
 
 use App\Components\Template;
 
-class Error
+class ErroController
 {
   public static function error($code, $message)
   {
     Template::title('Erro ' . $code);
-    Template::error('error');
+    Template::error('erro');
 
     http_response_code($code);
 
