@@ -11,6 +11,7 @@ define('HOME', URL . '/');
 define('PRODUTO', URL . '/produto');
 define('CARRINHO', URL . '/carrinho');
 define('CUPOM', URL . '/cupom');
+define('PEDIDO', URL . '/pedido');
 
 // Caminho para salvar a sessão
 define('SESSION', __DIR__ . '/storage/temp/session');

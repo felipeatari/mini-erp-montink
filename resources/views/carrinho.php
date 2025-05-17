@@ -1,13 +1,3 @@
-<?php
-
-use App\Components\Session;
-
-$carrinho = Session::all();
-
-$codigoCupomErro = $carrinho['codigo_cupom_erro'] ?? null;
-$cupom = $carrinho['cupom'] ?? [];
-$carrinhoProduto = $carrinho['carrinhoProduto'] ?? [];
-?>
 <table class="table table-hover mt-4 text-center align-middle border" style="width: 750px !important;">
     <thead>
         <tr>
@@ -19,12 +9,6 @@ $carrinhoProduto = $carrinho['carrinhoProduto'] ?? [];
         </tr>
     </thead>
     <tbody>
-        <?php
-        $subTotal = 0;
-        $total = 0;
-        $frete = 0;
-        $desconto = $cupom['desconto'] ?? 0;
-        ?>
         <!-- Produto -->
         <?php foreach ($carrinhoProduto as $item): ?>
             <tr>
@@ -45,12 +29,6 @@ $carrinhoProduto = $carrinho['carrinhoProduto'] ?? [];
                     <input type="text" name="codigo" id="codigo" class="form-control" placeholder="Informe o Código do Cupom" style="margin-right: 10px;">
                     <button class="btn btn-primary">Adicionar</button>
                 </form>
-                <?php if ($codigoCupomErro) { ?>
-                    <script>
-                        alert('<?= $codigoCupomErro ?>')
-                    </script>
-                    <?php Session::unset('codigo_cupom_erro') ?>
-                <?php } ?>
             </td>
         </tr>
         <tr>
@@ -135,44 +113,67 @@ $carrinhoProduto = $carrinho['carrinhoProduto'] ?? [];
     </tbody>
 </table>
 
-<table class="table mt-4 text-center align-middle border" style="width: 750px !important;">
-    <thead>
-        <tr>
-            <th colspan="4">
-                <div class="d-flex justify-content-between">
-                    <input type="text" name="cep" id="cep" placeholder="Informe seu CEP" class="form-control" style="margin-right: 10px;">
-                    <button type="button" class="btn btn-primary" onclick="buscarEndereco()">Buscar</button>
-                </div>
-            </th>
-        </tr>
-        <tr>
-            <th scope="col">Cidade</th>
-            <th scope="col">Bairro</th>
-            <th scope="col">Estado</th>
-            <th scope="col">Endereço</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>
-                <span id="cidade">-</span>
-                <input type="hidden" name="cidade" class="form-control">
-            </td>
-            <td>
-                <span id="bairro">-</span>
-                <input type="hidden" name="bairro" class="form-control">
-            </td>
-            <td>
-                <span id="estado">-</span>
-                <input type="hidden" name="estado" class="form-control">
-            </td>
-            <td>
-                <span id="endereco">-</span>
-                <input type="hidden" name="endereco" class="form-control">
-            </td>
-        </tr>
-    </tbody>
-</table>
+<!-- Endereço e Checkout -->
+<form  action="<?= CARRINHO ?>/checkout" method="POST">
+    <input type="hidden" name="total" value="<?= $total ?>">
+    <input type="hidden" name="desconto" value="<?= $descontoValor ?>">
+    <input type="hidden" name="frete" value="<?= $frete ?>">
+
+    <table class="table text-center align-middle border" style="width: 750px !important;">
+        <thead>
+            <tr>
+                <th colspan="4">
+                    <div class="d-flex justify-content-between">
+                        <input required type="text" name="cep" id="cep" placeholder="Informe seu CEP" class="form-control" style="margin-right: 10px;">
+                        <button type="button" class="btn btn-primary" onclick="buscarEndereco()">Buscar</button>
+                    </div>
+                </th>
+            </tr>
+            <tr>
+                <th scope="col">Cidade</th>
+                <th scope="col">Bairro</th>
+                <th scope="col">Estado</th>
+                <th scope="col">Endereço</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <input required type="text" name="cidade" class="form-control">
+                </td>
+                <td>
+                    <input required type="text" name="bairro" class="form-control">
+                </td>
+                <td>
+                    <input required type="text" name="estado" class="form-control">
+                </td>
+                <td>
+                    <input required type="text" name="endereco" class="form-control">
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="2">
+                    <label for="nome" class="form-label">Nome</label>
+                    <input required type="text" name="nome" class="form-control">
+                </td>
+                <td colspan="2">
+                    <label for="email" class="form-label">Email</label>
+                    <input required type="email" name="email" class="form-control">
+                </td>
+            </tr>
+
+            <?php if ($total > 0) { ?>
+                <tr>
+                    <td colspan="4">
+                        <button class="btn btn-success">checkout</button>
+                    </td>
+                </tr>
+            <?php } ?>
+        </tbody>
+    </table>
+</form>
+<!-- Endereço e Checkout -->
 
 <script>
     function buscarEndereco() {
@@ -192,16 +193,16 @@ $carrinhoProduto = $carrinho['carrinhoProduto'] ?? [];
                     return
                 }
 
-                document.querySelector('#cidade').innerHTML = data.localidade
+                // document.querySelector('#cidade').innerHTML = data.localidade
                 document.querySelector('input[name="cidade"]').value = data.localidade
 
-                document.querySelector('#bairro').innerHTML = data.bairro
+                // document.querySelector('#bairro').innerHTML = data.bairro
                 document.querySelector('input[name="bairro"]').value = data.bairro
 
-                document.querySelector('#estado').innerHTML = data.estado
+                // document.querySelector('#estado').innerHTML = data.estado
                 document.querySelector('input[name="estado"]').value = data.estado
 
-                document.querySelector('#endereco').innerHTML = data.logradouro
+                // document.querySelector('#endereco').innerHTML = data.logradouro
                 document.querySelector('input[name="endereco"]').value = data.logradouro
             })
             .catch(error => {

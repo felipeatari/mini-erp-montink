@@ -23,12 +23,6 @@ class Router
         $this->http_method = $_SERVER['REQUEST_METHOD'] ?? 'GET';
     }
 
-    public static function redirect(string $route): void
-    {
-        header('Location: ' . URL . $route);
-        die;
-    }
-
     private function convert_URL_str_to_URL_arr(string $url = null): array
     {
         $url = explode('/', $url);

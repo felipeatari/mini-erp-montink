@@ -22,7 +22,7 @@ class Model
         protected string $table
     ) {}
 
-    public function set_error(int|string $code, string $message = ''): void
+    private function set_error(int|string $code, string $message = ''): void
     {
         $this->error = true;
         $this->code_error = $code;
@@ -160,7 +160,7 @@ class Model
         return $this;
     }
 
-    public function fetch(bool $all = false): object|array|bool
+    public function fetch(bool $all = false): object|array|null
     {
         try {
             $connect = Connect::on();
@@ -187,19 +187,19 @@ class Model
             if (! $stmt->rowCount()) {
                 $this->set_error(404, 'Not Found');
 
-                return false;
+                return null;
             }
+
+            if ($all) {
+                return $stmt->fetchAll();
+            }
+
+            return $stmt->fetch();
         } catch (PDOException | Error $e) {
             $this->set_error($e->getCode(), $e->getMessage());
 
-            return false;
+            return null;
         }
-
-        if ($all) {
-            return $stmt->fetchAll();
-        }
-
-        return $stmt->fetch();
     }
 
     public function query_join(array $query_join): Model
@@ -277,6 +277,11 @@ class Model
     public function field(string $key, string|int|float $value)
     {
         $this->fields[$key] = $value;
+    }
+
+    public function fields(array $fields = [])
+    {
+        $this->fields = $fields;
     }
 
     public function save(): bool|array

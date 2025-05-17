@@ -5,6 +5,7 @@
     },
     "files":[
       "config/app.php",
+      "config/globals.php",
       "env.php"
     ]
   },

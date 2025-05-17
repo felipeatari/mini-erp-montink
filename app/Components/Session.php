@@ -18,7 +18,7 @@ class Session
     public static function all(): ?array
     {
         self::start();
-        return $_SESSION;
+        return $_SESSION ?? null;
     }
 
     public static function one(string $key = null): mixed

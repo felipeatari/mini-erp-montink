@@ -28,7 +28,7 @@ class CupomController
         $validade = filter_input(INPUT_POST, 'validade', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
         if (!$codigo or !$desconto or !$validade) {
-            die('error');
+            redirectBackAlert('Verifique os campos e tente novamnete');
         }
 
         $cupom = new Cupom;
@@ -37,16 +37,14 @@ class CupomController
         $cupom->field('validade', $validade);
         $cupom->save();
 
-        header('Location: ' . $_SERVER['HTTP_REFERER']);
-        exit;
+        redirectBack();
     }
 
     public function destroy($id)
     {
         (new Cupom)->delete($id);
 
-        header('Location: ' . $_SERVER['HTTP_REFERER']);
-        exit;
+        redirectBack();
     }
 
     public function add()
@@ -59,37 +57,36 @@ class CupomController
                 Session::unset('cupom');
             }
 
-            header('Location: ' . $_SERVER['HTTP_REFERER']);
-            exit;
+            redirectBack();
         }
 
         $cupom = (new Cupom)->find()->condition(['codigo' => $codigo])->fetch();
 
         $messagemErro = '';
+
         if (!$cupom) {
-            $messagemErro = 'Cupom não encontrado';
+            $messagemErro = 'Cupom não encontrado.';
         }
 
-        $data = new DateTime($cupom['validade']);
-        $agora = new DateTime();
+        if (! $messagemErro) {
+            $data = new DateTime($cupom['validade']);
+            $agora = new DateTime();
 
-        if ($data < $agora) {
-            $messagemErro = 'Esse cupom já venceu';
+            if ($data < $agora) {
+                $messagemErro = 'Esse cupom já venceu.';
+            }
         }
 
         if ($messagemErro) {
-            Session::set('codigo_cupom_erro', $messagemErro);
             if (Session::has('cupom')) {
                 Session::unset('cupom');
             }
 
-            header('Location: ' . $_SERVER['HTTP_REFERER']);
-            exit;
+            redirectBackAlert($messagemErro);
         }
 
         Session::set('cupom', $cupom);
 
-        header('Location: ' . $_SERVER['HTTP_REFERER']);
-        exit;
+        redirectBack();
     }
 }

@@ -16,7 +16,7 @@ $carrinhoQtd = App\Components\Session::one('carrinhoQtd');
 </head>
 
 <body>
-    <div class="container2">
+    <div class="container-fluid p-0">
         <header>
             <nav>
                 <ul>
@@ -46,6 +46,13 @@ $carrinhoQtd = App\Components\Session::one('carrinhoQtd');
                             </svg>
                         </a>
                     </li>
+                   <li class="d-flex align-items-center">
+                        <a class="d-flex align-items-center text-decoration-none" href="<?= PEDIDO ?>">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="24" height="24" fill="currentColor">
+                                <path d="M0 80L0 229.5c0 17 6.7 33.3 18.7 45.3l176 176c25 25 65.5 25 90.5 0L418.7 317.3c25-25 25-65.5 0-90.5l-176-176c-12-12-28.3-18.7-45.3-18.7L48 32C21.5 32 0 53.5 0 80zm112 32a32 32 0 1 1 0 64 32 32 0 1 1 0-64z"/>
+                            </svg>
+                        </a>
+                    </li>
                 </ul>
             </nav>
         </header>
@@ -57,9 +64,9 @@ $carrinhoQtd = App\Components\Session::one('carrinhoQtd');
         <script src="<?= $layout_js ?>"></script>
         <script src="<?= $view_js ?>"></script>
 
-        <footer class="rodape">
+        <!-- <footer>
             <p>Meu rodape</p>
-        </footer>
+        </footer> -->
     </div>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

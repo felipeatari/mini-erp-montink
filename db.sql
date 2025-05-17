@@ -9,7 +9,7 @@ USE `erp`;
 CREATE TABLE IF NOT EXISTS `produtos` (
     `id` INT AUTO_INCREMENT PRIMARY KEY,
     `nome` VARCHAR(255) NOT NULL,
-    `preco` DECIMAL(10,2) NOT NULL,
+    `preco` INT NOT NULL,
     `variacoes` JSON,
     `criado_em` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
@@ -23,10 +23,31 @@ CREATE TABLE IF NOT EXISTS `estoque` (
     FOREIGN KEY (`produto_id`) REFERENCES `produtos`(`id`) ON DELETE CASCADE
 );
 
--- Tabela de Estoque
+-- Tabela de Cupons
 CREATE TABLE IF NOT EXISTS `cupons` (
     `id` INT AUTO_INCREMENT PRIMARY KEY,
     `codigo` VARCHAR(50) NOT NULL,
     `desconto` INT NOT NULL DEFAULT 0,
     `validade` DATE NOT NULL
+);
+
+-- Tabela de Pedidos
+CREATE TABLE IF NOT EXISTS `pedidos` (
+    `id` INT AUTO_INCREMENT PRIMARY KEY,
+    `total` INT NOT NULL DEFAULT 0,
+    `frete` INT DEFAULT 0,
+    `desconto` INT DEFAULT 0,
+    `qtd_produtos` INT NOT NULL DEFAULT 0,
+    `produtos` JSON NOT NULL,
+    `cupom` VARCHAR(50),
+    `cidade` VARCHAR(255) NOT NULL,
+    `endereco` VARCHAR(255) NOT NULL,
+    `estado` VARCHAR(255) NOT NULL,
+    `bairro` VARCHAR(255) NOT NULL,
+    `cep` VARCHAR(255) NOT NULL,
+    `status` ENUM(
+      'pendente', 'aprovado', 'cancelado'
+    ) NOT NULL DEFAULT 'pendente',
+    `nome` VARCHAR(255) NOT NULL,
+    `email` VARCHAR(255) NOT NULL
 );
