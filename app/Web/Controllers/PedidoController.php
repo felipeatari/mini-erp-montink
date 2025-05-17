@@ -36,4 +36,39 @@ class PedidoController
 
         return $pedidoId;
     }
+
+    public function webhook()
+    {
+        $pedidoId = $_POST['pedido_id'] ?? null;
+        $status = $_POST['status'] ?? null;
+
+        if (!$pedidoId or !$status) {
+            jsonResponse(400, 'Veririque os parâmetros "pedido_id" e "status".');
+        }
+
+        if (! in_array($status, ['pendente', 'aprovado', 'cancelado'])) {
+            jsonResponse(400, 'O status informado é inválido. Aceitos: "pendente", "aprovado" e "cancelado".');
+        }
+
+        $model = new Pedido;
+
+        $model->field('status', $status);
+        $model->update($pedidoId);
+
+        if ($model->error) {
+            $code = httpStatusCodeError($model->code_error);
+            jsonResponse($code, $model->message_error);
+        }
+
+        $pedido = $model->find_id($pedidoId);
+
+        if ($model->error) {
+            $code = httpStatusCodeError($model->code_error);
+            jsonResponse($code, $model->message_error);
+        }
+
+        jsonResponse(data: ['status' => $pedido['status']]);
+    }
 }
+
+

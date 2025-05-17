@@ -29,7 +29,7 @@ class Model
         $this->message_error = $message;
     }
 
-    public function find_id(int $id, array $inputs = [], bool $simple = true): object|array|bool
+    public function find_id(int $id, array $inputs = []): object|array|null|bool
     {
         try {
             $query_fields = ' * ';
@@ -52,19 +52,15 @@ class Model
             if (! $stmt->rowCount()) {
                 $this->set_error(404, 'Not Found');
 
-                return false;
+                return [];
             }
+
+            return $stmt->fetch();
         } catch (PDOException | Error $e) {
             $this->set_error($e->getCode(), $e->getMessage());
 
-            return false;
+            return [];
         }
-
-        if ($simple) {
-            return $stmt->fetch();
-        }
-
-        return $stmt->fetchAll();
     }
 
     public function find(array $inputs = []): Model
@@ -160,7 +156,7 @@ class Model
         return $this;
     }
 
-    public function fetch(bool $all = false): object|array|null
+    public function fetch(bool $all = false): object|array|null|bool
     {
         try {
             $connect = Connect::on();

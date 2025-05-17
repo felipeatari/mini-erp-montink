@@ -8,6 +8,5 @@
       "config/globals.php",
       "env.php"
     ]
-  },
-  "require": {}
+  }
 }

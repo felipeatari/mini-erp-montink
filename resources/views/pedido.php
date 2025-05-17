@@ -4,8 +4,8 @@
             $status = strtolower($pedido['status']);
             $statusClasses = [
                 'pendente' => 'bg-warning text-dark',
-                'aprovado' => 'bg-success',
-                'cancelado' => 'bg-danger'
+                'aprovado' => 'bg-success text-light',
+                'cancelado' => 'bg-danger text-light'
             ];
             $badgeClass = $statusClasses[$status] ?? 'bg-secondary';
         ?>
@@ -13,7 +13,6 @@
         <div class="my-4 card card-body">
             <div class="d-flex justify-content-between align-items-center mb-3">
                 <h5 class="mb-0">Pedido #<?= $pedido['id'] ?></h5>
-                <span class="badge <?= $badgeClass ?>"><?= ucfirst($status) ?></span>
             </div>
 
             <div class="row mb-3">
@@ -27,7 +26,7 @@
                 </div>
                 <div class="col">
                     <label class="form-label">Status</label>
-                    <input type="text" value="<?= ucfirst($pedido['status']) ?>" class="form-control" readonly>
+                    <input type="text" value="<?= ucfirst($pedido['status']) ?>" class="form-control <?= $badgeClass ?>" readonly>
                 </div>
             </div>
 

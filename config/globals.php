@@ -75,3 +75,42 @@ if (!function_exists('jsonDecodeDB')) {
         }, $collection);
     }
 }
+
+if (!function_exists('jsonResponse')) {
+    function jsonResponse(int $code = 200, string $message = '', array $data = [], string $status = ''): void
+    {
+        http_response_code($code);
+
+        header('Content-Type: application/json; charset=utf-8');
+
+        $response = ['code' => $code];
+
+        if ($status === 'success') {
+            $response['status'] = 'success';
+        } elseif ($status === 'error') {
+            $response['status'] = 'error';
+        }
+
+        if ($message) {
+            $response['message'] = $message;
+        }
+
+        if ($data) {
+            $response['data'] = $data;
+        }
+
+        echo json_encode($response, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
+        exit;
+    }
+}
+
+if (!function_exists('httpStatusCodeError')) {
+    function httpStatusCodeError(int $statusCode = 0)
+    {
+        $statusCodeErrors = [400, 401, 403, 404, 405, 406, 407, 408, 409, 500, 501, 502, 503, 504];
+
+        if (! in_array($statusCode, $statusCodeErrors)) $statusCode = 500;
+
+        return $statusCode;
+    }
+}
