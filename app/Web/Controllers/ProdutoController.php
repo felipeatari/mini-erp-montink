@@ -156,10 +156,6 @@ class ProdutoController
                 Session::set('carrinhoProduto', $carrinhoProdutoAdd);
             }
 
-            // echo '<pre>';
-            // print_r($carrinhoProdutoAdd);
-            // echo '</pre>';die;
-
             header('Location: ' . $_SERVER['HTTP_REFERER']);
             exit;
         }

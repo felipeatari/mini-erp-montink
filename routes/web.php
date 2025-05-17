@@ -2,8 +2,11 @@
 
 $web->get('/', 'ProdutoController->index');
 $web->get('/produto', 'ProdutoController->index');
-$web->post('/produto', 'ProdutoController->create');
-$web->post('/produto/{id}', 'ProdutoController->update');
+$web->post('/produto/criar', 'ProdutoController->create');
+$web->post('/produto/editar/{id}', 'ProdutoController->update');
+
 $web->get('/carrinho', 'CarrinhoController->index');
-// $web->post('/carrinho', 'CarrinhoController->create');
-$web->get('/cupons', 'Coupons->index');
+
+$web->get('/cupom', 'CupomController->index');
+$web->post('/cupom/criar', 'CupomController->create');
+$web->post('/cupom/apagar/{id}', 'CupomController->destroy');

@@ -9,8 +9,8 @@ define('URL', 'http://localhost');
 // Define as rotas do projeto
 define('HOME', URL . '/');
 define('PRODUTO', URL . '/produto');
-define('CART', URL . '/carrinho');
-define('COUPONS', URL . '/cupons');
+define('CARRINHO', URL . '/carrinho');
+define('CUPOM', URL . '/cupom');
 
 // Caminho para salvar a sessão
 define('SESSION', __DIR__ . '/storage/temp/session');

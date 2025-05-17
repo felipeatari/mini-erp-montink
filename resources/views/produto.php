@@ -1,6 +1,6 @@
 <div>
     <h1 class="h1 my-4">Gerenciar Produto</h1>
-    <form action="<?= PRODUTO ?>" method="POST">
+    <form action="<?= PRODUTO ?>/criar" method="POST">
         <div class="row">
             <div class="col">
                 <label for="nome" class="form-label">Nome</label>
@@ -29,7 +29,7 @@
     </form>
 
     <?php foreach ($produtos as $produto): ?>
-        <form action="<?= PRODUTO ?>/<?= $produto['id'] ?>" method="POST" class="my-4">
+        <form action="<?= PRODUTO ?>/editar/<?= $produto['id'] ?>" method="POST" class="my-4">
             <div class="row">
                 <input type="hidden" name="id" value="<?= $produto['id'] ?>">
                 <input type="hidden" name="estoque_id" value="<?= $produto['estoque_id'] ?>">

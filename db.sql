@@ -6,7 +6,7 @@ CREATE DATABASE IF NOT EXISTS `erp`
 USE `erp`;
 
 -- Tabela de Produtos
-CREATE TABLE `produtos` (
+CREATE TABLE IF NOT EXISTS `produtos` (
     `id` INT AUTO_INCREMENT PRIMARY KEY,
     `nome` VARCHAR(255) NOT NULL,
     `preco` DECIMAL(10,2) NOT NULL,
@@ -15,10 +15,18 @@ CREATE TABLE `produtos` (
 );
 
 -- Tabela de Estoque
-CREATE TABLE `estoque` (
+CREATE TABLE IF NOT EXISTS `estoque` (
     `id` INT AUTO_INCREMENT PRIMARY KEY,
     `produto_id` INT NOT NULL,
     `quantidade` INT NOT NULL DEFAULT 0,
     `atualizado_em` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     FOREIGN KEY (`produto_id`) REFERENCES `produtos`(`id`) ON DELETE CASCADE
+);
+
+-- Tabela de Estoque
+CREATE TABLE IF NOT EXISTS `cupons` (
+    `id` INT AUTO_INCREMENT PRIMARY KEY,
+    `codigo` VARCHAR(50) NOT NULL,
+    `desconto` INT NOT NULL DEFAULT 0,
+    `validade` DATE NOT NULL
 );
