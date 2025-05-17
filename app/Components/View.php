@@ -120,9 +120,9 @@ class View
         ]);
 
         // Renderiza em linha e sem espaço entre as tags
-        $template = str_replace("\n", "", $template);
-        $template = preg_replace('/\s+/', ' ', trim($template));
-        $template = str_replace('> <', '><', $template);
+        // $template = str_replace("\n", "", $template);
+        // $template = preg_replace('/\s+/', ' ', trim($template));
+        // $template = str_replace('> <', '><', $template);
 
         echo $template;
         die;
