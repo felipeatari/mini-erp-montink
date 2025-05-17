@@ -4,9 +4,8 @@
       "App\\":"app/"
     },
     "files":[
-      "config/config.php",
-      "config/env.php",
-      "tests/config/debug.php"
+      "config/app.php",
+      "env.php"
     ]
   },
   "require": {}

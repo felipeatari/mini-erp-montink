@@ -3,6 +3,8 @@ use App\Components\Session;
 
 $carrinho = Session::all();
 
+$codigoCupomErro = $carrinho['codigo_cupom_erro'] ?? null;
+$cupom = $carrinho['cupom'] ?? [];
 $carrinhoProduto = $carrinho['carrinhoProduto'] ?? [];
 ?>
 <table class="table table-hover mt-4 text-center align-middle border" style="width: 750px !important;">
@@ -19,7 +21,7 @@ $carrinhoProduto = $carrinho['carrinhoProduto'] ?? [];
         <?php
             $subTotal = 0;
             $total = 0;
-            $desconto = 0;
+            $desconto = $cupom['desconto'] ?? 0;
         ?>
         <!-- Produto -->
         <?php foreach($carrinhoProduto as $item): ?>
@@ -33,6 +35,32 @@ $carrinhoProduto = $carrinho['carrinhoProduto'] ?? [];
             <?php $subTotal += $item['preco_total']; ?>
         <?php endforeach; ?>
         <!-- End Produto -->
+
+        <!-- Cupom -->
+         <tr>
+            <td colspan="5">
+                <form action="<?= CUPOM ?>/adicionar" method="POST" class="d-flex">
+                    <input type="text" name="codigo" id="codigo" class="form-control" placeholder="Informe o Código do Cupom" style="margin-right: 10px;">
+                    <button class="btn btn-primary">Adicionar</button>
+                </form>
+                <?php if($codigoCupomErro) { ?>
+                <script>alert('<?= $codigoCupomErro ?>')</script>
+                <?php Session::unset('codigo_cupom_erro') ?>
+                <?php } ?>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3">
+                Código do Cupom: <?= isset($cupom['codigo']) ? '<span class="border px-2 py-1">' . $cupom['codigo'] . '</span>' : '' ?>
+            </td>
+            <td colspan="1">
+                Validade: <?= isset($cupom['validade']) ? (new DateTime($cupom['validade']))->format('d/m/Y') : '' ?>
+            </td>
+            <td colspan="1">
+                Desconto: <?= isset($cupom['desconto']) ? $cupom['desconto'] . '%' : '' ?>
+            </td>
+        </tr>
+        <!-- End Cupom -->
 
         <!-- Subtotal -->
         <tr class="fw-semibold">
@@ -67,19 +95,30 @@ $carrinhoProduto = $carrinho['carrinhoProduto'] ?? [];
         </tr>
         <!-- End Frete -->
 
-        <!-- Desconto -->
         <?php $total = $subTotal + $frete; ?>
 
+        <!-- Desconto -->
+         <?php
+            $descontoValor = 0;
+
+            if ($desconto) {
+                $descontoValor = ($total * $desconto) / 100;
+            }
+        ?>
         <tr class="fw-semibold">
             <td colspan="4">
                 Desconto
             </td>
-            <td>R$ <?= $desconto ?></td>
+            <td>R$ <?= $descontoValor ?></td>
         </tr>
         <!-- End Desconto -->
 
         <!-- Total -->
-        <?php $total -= $desconto; ?>
+        <?php
+            if ($descontoValor) {
+                $total -= $descontoValor;
+            }
+        ?>
         <tr class="fw-semibold">
             <td colspan="4">
                 Total

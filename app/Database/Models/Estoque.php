@@ -6,8 +6,8 @@ use App\Database\Model;
 
 class Estoque extends Model
 {
-  public function __construct()
-  {
-    parent::__construct('estoque');
-  }
+    public function __construct()
+    {
+        parent::__construct('estoque');
+    }
 }

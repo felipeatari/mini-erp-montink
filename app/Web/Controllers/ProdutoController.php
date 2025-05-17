@@ -3,7 +3,7 @@
 namespace App\Web\Controllers;
 
 use App\Components\Session;
-use App\Components\Template;
+use App\Components\View;
 use App\Database\Models\Estoque;
 use App\Database\Models\Produto;
 
@@ -11,8 +11,8 @@ class ProdutoController
 {
     public function index()
     {
-        Template::title('Pagina Produto');
-        Template::app('produto');
+        View::title('Pagina Produto');
+        View::app('produto');
 
         $data = (new Produto)->query_join(['order' => 'DESC'])->joins(['estoque' => 'produto_id']);
 
@@ -34,7 +34,7 @@ class ProdutoController
             endforeach;
         }
 
-        return Template::view([
+        return View::view([
             'produtos' => $produtos,
         ]);
     }

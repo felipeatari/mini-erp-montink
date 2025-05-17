@@ -2,23 +2,23 @@
 
 namespace App\Web\Controllers;
 
-use App\Components\Template;
+use App\Components\View;
 
 class CarrinhoController
 {
-  public function index()
-  {
-    Template::title('Carrinho de Compras');
-    Template::app('carrinho');
+    public function index()
+    {
+        View::title('Carrinho de Compras');
+        View::app('carrinho');
 
-    return Template::view();
-  }
+        return View::view();
+    }
 
-  public function create()
-  {
-    echo '<pre>';
-    print_r($_POST);
-    echo '</pre>';
-    die;
-  }
+    public function create()
+    {
+        echo '<pre>';
+        print_r($_POST);
+        echo '</pre>';
+        die;
+    }
 }

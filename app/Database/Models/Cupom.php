@@ -6,8 +6,8 @@ use App\Database\Model;
 
 class Cupom extends Model
 {
-  public function __construct()
-  {
-    parent::__construct('cupons');
-  }
+    public function __construct()
+    {
+        parent::__construct('cupons');
+    }
 }
