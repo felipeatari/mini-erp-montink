@@ -14,24 +14,8 @@ class PedidoController
         View::title('Meus Pedidos');
         View::app('pedido');
 
-        $pedidos = (new Pedido)->find()->fetch(true);
-
-        if ($pedidos) {
-            $pedidos = array_map(function ($item) {
-                if (isset($item['pedidos']['variacoes']) and $item['pedidos']['variacoes']) {
-                    $json = $item['pedidos']['variacoes'];
-                    $decoded = json_decode($json, true);
-
-                    if (json_last_error() === JSON_ERROR_NONE) {
-                        $item['pedidos']['variacoes'] = $decoded;
-                    } else {
-                        $item['pedidos']['variacoes'] = [];
-                    }
-                }
-
-                return $item;
-            }, $pedidos);
-        }
+        $pedidos = (new Pedido)->find()->order()->fetch(true);
+        $pedidos = jsonDecodeDB($pedidos, ['produtos']);
 
         return View::view([
             'pedidos' => $pedidos ?? [],

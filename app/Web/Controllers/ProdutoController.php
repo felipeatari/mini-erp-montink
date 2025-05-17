@@ -14,20 +14,10 @@ class ProdutoController
         View::app('produto');
 
         $produtos = (new Produto)->query_join(['order' => 'DESC'])->joins(['estoque' => 'produto_id']);
+        $produtos = jsonDecodeDB($produtos, ['produtos.variacoes']);
 
         if ($produtos) {
             $produtos = array_map(function ($item) {
-                if (isset($item['produtos']['variacoes']) and $item['produtos']['variacoes']) {
-                    $json = $item['produtos']['variacoes'];
-                    $decoded = json_decode($json, true);
-
-                    if (json_last_error() === JSON_ERROR_NONE) {
-                        $item['produtos']['variacoes'] = $decoded;
-                    } else {
-                        $item['produtos']['variacoes'] = [];
-                    }
-                }
-
                 if (isset($item['produtos']['preco']) and $item['produtos']['preco']) {
                     $item['produtos']['preco'] /= 100;
                 }
