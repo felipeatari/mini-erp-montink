@@ -15,3 +15,5 @@ $web->post('/cupom/adicionar', 'CupomController->add');
 
 $web->get('/pedido', 'PedidoController->index');
 $web->post('/pedido/webhook', 'PedidoController->webhook');
+
+$web->get('/teste-email', 'TesteController->mail');

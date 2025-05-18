@@ -8,5 +8,8 @@
       "config/globals.php",
       "env.php"
     ]
+  },
+  "require": {
+    "phpmailer/phpmailer": "^6.10"
   }
 }

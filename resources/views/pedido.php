@@ -1,5 +1,6 @@
 <div>
-    <?php foreach ($pedidos as $pedido): ?>
+    <?php if ($pedidos) { ?>
+        <?php foreach ($pedidos as $pedido): ?>
         <?php
             $status = strtolower($pedido['status']);
             $statusClasses = [
@@ -99,4 +100,7 @@
             </div>
         </div>
     <?php endforeach ?>
+    <?php } else { ?>
+        <h4 class="mt-4 h4">Nenhum pedido</h4>
+    <?php } ?>
 </div>

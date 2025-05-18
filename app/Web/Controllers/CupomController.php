@@ -17,7 +17,7 @@ class CupomController
         $cupons = (new Cupom)->find()->fetch(true);
 
         return View::view([
-            'cupons' => $cupons
+            'cupons' => $cupons ?? []
         ]);
     }
 
