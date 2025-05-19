@@ -37,6 +37,8 @@ class Mail
 
             $mail->CharSet = 'UTF-8';
             $mail->Encoding = 'base64';
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+            // $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS
 
             $mail->isHTML(true);
             $mail->Subject = $this->subject;
