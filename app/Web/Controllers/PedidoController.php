@@ -65,24 +65,24 @@ class PedidoController
             jsonResponse(400, 'O status informado é inválido. Aceitos: "pendente", "aprovado" e "cancelado".');
         }
 
-        $model = new Pedido;
+        $pedido = new Pedido;
 
-        $model->field('status', $status);
-        $model->update($pedidoId);
+        $pedido->find_id($pedidoId);
 
-        if ($model->error) {
-            $code = httpStatusCodeError($model->code_error);
-            jsonResponse($code, $model->message_error);
+        if ($pedido->error) {
+            $code = httpStatusCodeError($pedido->code_error);
+            jsonResponse($code, $pedido->message_error);
         }
 
-        $pedido = $model->find_id($pedidoId);
+        $pedido->field('status', $status);
+        $pedido->update($pedidoId);
 
-        if ($model->error) {
-            $code = httpStatusCodeError($model->code_error);
-            jsonResponse($code, $model->message_error);
+        if ($pedido->error) {
+            $code = httpStatusCodeError($pedido->code_error);
+            jsonResponse($code, $pedido->message_error);
         }
 
-        jsonResponse(data: ['status' => $pedido['status']]);
+        jsonResponse(data: ['status' => $status]);
     }
 
     private function html(array $pedido)
