@@ -1,5 +1,5 @@
 <div>
-    <h1 class="h1 my-4">Gerenciar Cupons</h1>
+    <h2 class="h2 my-4">Gerenciar Cupons</h2>
     <form action="<?= CUPOM ?>/criar" method="POST">
         <div class="row mb-3">
             <div class="col">

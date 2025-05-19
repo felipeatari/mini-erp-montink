@@ -14,7 +14,7 @@ class CupomController
         View::title('Cupons de Desconto');
         View::app('cupom');
 
-        $cupons = (new Cupom)->find()->fetch(true);
+        $cupons = (new Cupom)->find()->order()->fetch(true);
 
         return View::view([
             'cupons' => $cupons ?? []

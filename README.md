@@ -1,7 +1,7 @@
 # 🧾 Mini ERP - Teste Montink
 
-Este projeto é um **mini ERP** desenvolvido como parte de um **teste técnico para a empresa Montink**.  
-A aplicação foi construída utilizando **PHP 8.2**, **Apache** e **MySQL**, com suporte ao envio de e-mails por **PHPMailer**, Bootstrap no Front-End para estilizar as páginas e arquitetura MVC.  
+Este projeto é um **mini ERP** desenvolvido como parte de um **teste técnico para a empresa Montink**.
+A aplicação foi construída utilizando **PHP 8.2**, **Apache** e **MySQL**, com suporte ao envio de e-mails por **PHPMailer**, Bootstrap no Front-End para estilizar as páginas e arquitetura MVC.
 
 Recomenda-se fortemente a utilização de **Docker** para garantir a execução correta e sem conflitos de ambiente.
 
@@ -9,10 +9,10 @@ Recomenda-se fortemente a utilização de **Docker** para garantir a execução 
 
 ## 📦 Tecnologias utilizadas
 
-- PHP 8.2  
-- Apache  
-- MySQL  
-- PHPMailer  
+- PHP 8.2
+- Apache
+- MySQL
+- PHPMailer
 - Docker & Docker Compose
 
 ---
@@ -31,7 +31,7 @@ Recomenda-se fortemente a utilização de **Docker** para garantir a execução 
    ```bash
    docker compose up -d
    ```
-4. Acesse o projeto em:  
+4. Acesse o projeto em:
    [http://localhost](http://localhost)
 
 > O banco de dados será inicializado automaticamente com o script `db.sql`.
@@ -91,7 +91,7 @@ define('MAILER_SENDER_NAME', 'ERP Montink');
 
 A aplicação utiliza **PHPMailer** para enviar e-mails de confirmação de pedido após uma compra.
 
-Você pode usar **qualquer servidor SMTP**, como Gmail, SendGrid, Amazon SES etc., desde que ajuste as credenciais corretamente.  
+Você pode usar **qualquer servidor SMTP**, como Gmail, SendGrid, Amazon SES etc., desde que ajuste as credenciais corretamente.
 No teste foi utilizado o **Mailtrap**, mas as configurações seguem o padrão SMTP universal.
 
 ---
@@ -100,7 +100,7 @@ No teste foi utilizado o **Mailtrap**, mas as configurações seguem o padrão S
 
 ## 🙋‍♂️ Autor
 
-Feito com dedicação para o processo seletivo da Montink.  
+Feito com dedicação para o processo seletivo da Montink.
 Desenvolvedor: **Luiz Felipe**
 
 ---
@@ -113,5 +113,5 @@ Este projeto é apenas para fins educacionais e de avaliação técnica.
 
 ## 📹 Demonstração
 
-Confira o vídeo de apresentação do projeto:  
+Confira o vídeo de apresentação do projeto:
 ➡️ [Clique aqui para assistir no Google Drive](https://drive.google.com/file/d/1wCZQtQtAhtn4JtVaL_TTlQbtLzMlXqaw/view?usp=sharing)

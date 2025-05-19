@@ -47,7 +47,7 @@
         <!-- Subtotal -->
         <tr class="fw-semibold">
             <td colspan="4">SubTotal</td>
-            <td>R$ <?= $subTotal ?></td>
+            <td>R$ <?= number_format($subTotal, 2, ',', '.') ?></td>
         </tr>
         <!-- End Subtotal -->
 
@@ -69,9 +69,9 @@
             </td>
             <td>
                 <?php if ($frete > 0) { ?>
-                    R$ <?= $frete ?>
+                    R$ <?= number_format($frete, 2, ',', '.') ?>
                 <?php } elseif ($frete == 0 and $subTotal == 0) { ?>
-                    R$ <?= $frete ?>
+                    R$ <?= number_format($frete, 2, ',', '.') ?>
                 <?php } else { ?>
                     Frete Grátis
                 <?php } ?>
@@ -93,7 +93,7 @@
             <td colspan="4">
                 Desconto
             </td>
-            <td>R$ <?= $descontoValor ?></td>
+            <td>R$ <?= number_format($descontoValor, 2, ',', '.') ?></td>
         </tr>
         <!-- End Desconto -->
 
@@ -107,7 +107,7 @@
             <td colspan="4">
                 Total
             </td>
-            <td>R$ <?= $total ?></td>
+            <td>R$ <?= number_format($total, 2, ',', '.') ?></td>
         </tr>
         <!-- End Total -->
     </tbody>
