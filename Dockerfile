@@ -17,5 +17,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # Instala o Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
+# Instala as dependências do Composer
+RUN composer install --no-interaction --prefer-dist --optimize-autoloader
+
 # Ativa o mod_rewrite do Apache
 RUN a2enmod rewrite

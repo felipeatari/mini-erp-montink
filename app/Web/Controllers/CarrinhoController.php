@@ -140,8 +140,7 @@ class CarrinhoController
         $pedido = (new PedidoController)->create($data);
 
         if (isset($pedido['error'])) {
-            echo $pedido['error'];
-            die;
+            redirectBackAlert('Erro ao gerar pedido.');
         }
 
         $estoque = new Estoque;

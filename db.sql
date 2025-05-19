@@ -34,9 +34,9 @@ CREATE TABLE IF NOT EXISTS `cupons` (
 -- Tabela de Pedidos
 CREATE TABLE IF NOT EXISTS `pedidos` (
     `id` INT AUTO_INCREMENT PRIMARY KEY,
-    `total` INT NOT NULL DEFAULT 0,
-    `frete` INT DEFAULT 0,
-    `desconto` INT DEFAULT 0,
+    `total` DECIMAL(10,2) NOT NULL DEFAULT 0,
+    `frete` DECIMAL(10,2) DEFAULT 0,
+    `desconto` DECIMAL(10,2) DEFAULT 0,
     `qtd_produtos` INT NOT NULL DEFAULT 0,
     `produtos` JSON NOT NULL,
     `cupom` VARCHAR(50),
