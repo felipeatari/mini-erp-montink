@@ -109,7 +109,7 @@ Desenvolvedor: **Luiz Felipe**
 
 Este projeto é apenas para fins educacionais e de avaliação técnica.
 
----
+```
 
 ## 📹 Demonstração
 
